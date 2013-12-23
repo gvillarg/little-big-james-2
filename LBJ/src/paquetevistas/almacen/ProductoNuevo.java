@@ -1,0 +1,655 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package paquetevistas.almacen;
+
+import Seguridad.Controlador.controladorseguridad;
+import controlador.almacen.controladoralmacen;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import modelos.Almacen;
+import modelos.Tipoproducto;
+import modelos.Unidadmedida;
+import modelos.Usuario;
+import paquetevistas.Escritorio;
+
+/**
+ *
+ * @author Karina
+ */
+public class ProductoNuevo extends javax.swing.JInternalFrame {
+
+    /**
+     * Creates new form ProductoNuevo
+     */
+    public static controladoralmacen mycontroladoralmacen = new controladoralmacen();
+    public static String tiposal = "Materia Prima";
+
+    //Para el registro de Log
+    public static Usuario usuario = lbj.LBJ.Login.usuario;
+    public static controladorseguridad mycontroladorseguridad = new controladorseguridad();
+    
+    public ProductoNuevo() {
+        initComponents();
+        loadComponents();
+    }
+
+    void loadComponents() {
+        jTextField3.enable(false);
+        jTextField4.enable(false);
+
+//        jComboBox1.removeAllItems();
+        List<Tipoproducto> tiposproductos = new ArrayList<Tipoproducto>();
+        tiposproductos = mycontroladoralmacen.sacatipoproducto();
+        for (int i = 0; i < tiposproductos.size() - 2; i++) {
+            jComboBox1.addItem(tiposproductos.get(i).getNombre());
+        }
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.removeAllItems();
+        List<Almacen> almacenes = new ArrayList<Almacen>();
+        almacenes = mycontroladoralmacen.sacaalmacen();
+        for (int i = 0; i < almacenes.size(); i++) {
+            jComboBox2.addItem(almacenes.get(i).getNombre());
+        }
+        jComboBox2.setSelectedIndex(0);
+
+        jComboBox3.removeAllItems();
+        List<Unidadmedida> unidadesmedidas = new ArrayList<Unidadmedida>();
+        unidadesmedidas = mycontroladoralmacen.sacaunidadmedida();
+        for (int i = 0; i < unidadesmedidas.size(); i++) {
+            jComboBox3.addItem(unidadesmedidas.get(i).getNombre());
+        }
+        jComboBox3.setSelectedIndex(0);
+
+        jRadioButton1.setSelected(true);
+        jRadioButton2.setSelected(false);
+
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //jComboBox1.removeAllItems();
+                List<Tipoproducto> tp = new ArrayList<Tipoproducto>();
+                tp = mycontroladoralmacen.sacatipoproducto();
+                String seleccionalmacen = jComboBox2.getSelectedItem().toString();
+
+                if (seleccionalmacen.equalsIgnoreCase("Principal")) {
+                    System.out.println("Entro aqui Principal");
+                    int i = 0;
+                    for (i = 0; i < tp.size(); i++) {
+                        if (tp.get(i).getIdtipoproducto() == 1
+                                || tp.get(i).getIdtipoproducto() == 2) {
+                            jComboBox1.addItem(tp.get(i).getNombre());
+                        }
+                    }
+                    int cantidad = jComboBox1.getItemCount();
+                    System.out.println(cantidad);
+                    //for(int j=2; j<cantidad; j++){
+                    jComboBox1.removeItemAt(1);
+                    jComboBox1.removeItemAt(0);
+                    //}   
+
+
+                    jComboBox1.setSelectedIndex(0);
+                    jTextField4.setText("");
+                    jTextField3.setText("");
+                    //jTextField4.enable(false);
+                    //jTextField3.enable(false);
+                    System.out.println("salio aqui Principal");
+                } else {
+                    System.out.println("Entro aqui Produccion");
+                    int i = 0;
+                    for (i = 0; i < tp.size(); i++) {
+                        if (tp.get(i).getIdtipoproducto() == 3
+                                || tp.get(i).getIdtipoproducto() == 4) {
+                            jComboBox1.addItem(tp.get(i).getNombre());
+                        }
+                    }
+                    int cantidad = jComboBox1.getItemCount();
+                    System.out.println(cantidad);
+                    //for(int j=2; j<cantidad; j++){
+                    jComboBox1.removeItemAt(1);
+                    jComboBox1.removeItemAt(0);
+                    //}
+
+                    jComboBox1.setSelectedIndex(0);
+                    //jTextField4.enable(true);
+                    //jTextField3.enable(true);
+                    System.out.println("salio aqui Produccion");
+                }
+            }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+
+        jLabel7.setText("Stock Actual:");
+
+        jLabel8.setText("Stock Máximo:");
+
+        jLabel9.setText("Stock Mínimo:");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/file plus.png"))); // NOI18N
+
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Producto Nuevo");
+
+        jLabel15.setText("Nombre:");
+
+        jLabel16.setText("Descripcion:");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jLabel18.setText("Stock Minimo:");
+
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Stock Maximo:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Tipo:");
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Estado:");
+
+        jRadioButton1.setText("Activo");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setText("Inactivo");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Almacen:");
+
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Unidad:");
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/error 1.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Agregar");
+
+        jLabel10.setText("Cancelar");
+
+        jLabel11.setText("Peso:");
+
+        jLabel12.setText("Costo:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(jRadioButton1))
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton2)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField1)
+                                        .addComponent(jTextField3)
+                                        .addComponent(jTextField4))))
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox2, 0, 156, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(21, 21, 21))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel11)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel10))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        if(!(jRadioButton2.isSelected())){
+            jRadioButton1.setSelected(true);
+        }
+        jRadioButton2.setSelected(false);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        if(!(jRadioButton1.isSelected())){
+            jRadioButton2.setSelected(true);
+        }
+        jRadioButton1.setSelected(false);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nombre = jTextField2.getText();
+        String descripcion = jTextArea2.getText();
+        Float stock = Float.parseFloat("0");
+        String stockminimo = jTextField8.getText();
+        String stockmaximo = jTextField1.getText();
+        int estado;
+        if (jRadioButton1.isSelected()) {
+            estado = 1;
+        } else {
+            estado = 0;
+        }
+        String tipo = jComboBox1.getSelectedItem().toString();
+        Tipoproducto tipoproducto = mycontroladoralmacen.sadaidtipo(tipo);
+
+        String almacen = jComboBox2.getSelectedItem().toString();
+        Almacen idalmacen = mycontroladoralmacen.sacaidalmacen(almacen);
+
+        String unidad = jComboBox3.getSelectedItem().toString();
+        Unidadmedida idunidad = mycontroladoralmacen.sacaidunidad(unidad);
+
+        String peso = jTextField3.getText();
+        String costo = jTextField4.getText();
+
+        //antes que todo esto debe estar la validacion del float sino vuelo
+        int nombrecorrecto = mycontroladoralmacen.validanombre(nombre);
+
+        if (nombrecorrecto == 1) { // cuando el nombre esta vacio
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre del producto");
+        } else if (nombrecorrecto == 2) {//cuando se ingresan caracteres no permitidos
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres correctos en el nombre");
+        } else {
+            int existencia = mycontroladoralmacen.verificaexistenciaproducto(nombre);
+            if (existencia == 1) {
+                //debe estar que un nombre no tenga espacios en blanco sino no lo identifica
+                JOptionPane.showMessageDialog(this, "Ya existe el producto que intenta guardar");
+            } else {
+                int stockminimocorrecto = mycontroladoralmacen.validastockminimo(stockminimo);
+                if (stockminimocorrecto == 1) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el stock mínimo");
+                } else if (stockminimocorrecto == 2) {
+                    JOptionPane.showMessageDialog(this, "Ingrese numeros positivos en el stock mínimo");
+                } else {
+                    float smin = Float.parseFloat(stockminimo);
+                    int stockmaximocorrecto = mycontroladoralmacen.validastockmaximo2(stockmaximo,smin);
+                    if (stockmaximocorrecto == 1) {
+                        JOptionPane.showMessageDialog(this, "Ingrese el stock máximo");
+                    } else if (stockmaximocorrecto == 2) {
+                        JOptionPane.showMessageDialog(this, "Ingrese numeros positivos en el stock máximo");
+                    } else if (stockmaximocorrecto == 3) {
+                        JOptionPane.showMessageDialog(this, "El stock máximo no puede ser 0");
+                    } else if(stockmaximocorrecto == 4){
+                        JOptionPane.showMessageDialog(this, "El stock minimo no puede ser mayor que el maximo");
+                    }else {
+                        if (tipoproducto.getIdtipoproducto() == 3 || tipoproducto.getIdtipoproducto() == 4) {
+                            //3 necesita costo y 4 necesita coso y peso
+                            int costocorrecto = mycontroladoralmacen.validastockmaximo(costo);
+                            if (costocorrecto == 1) {
+                                JOptionPane.showMessageDialog(this, "Ingrese el costo");
+                            } else if (costocorrecto == 2) {
+                                JOptionPane.showMessageDialog(this, "Ingrese numeros positivos en el costo");
+                            } else if (costocorrecto == 3) {
+                                JOptionPane.showMessageDialog(this, "El costo no puede ser 0");
+                            } else {
+                                if (tipoproducto.getIdtipoproducto() == 4) {
+                                    int pesocorrecto = mycontroladoralmacen.validastockmaximo(peso);
+                                    if (pesocorrecto == 1) {
+                                        JOptionPane.showMessageDialog(this, "Ingrese el peso");
+                                    } else if (pesocorrecto == 2) {
+                                        JOptionPane.showMessageDialog(this, "Ingrese numeros positivos en el peso");
+                                    } else if (pesocorrecto == 3) {
+                                        JOptionPane.showMessageDialog(this, "El peso no puede ser 0");
+                                    } else {
+                                        Float smax = Float.parseFloat(stockmaximo);
+                                        mycontroladoralmacen.guardaproducto(nombre, descripcion, stock, smin, smax, estado,
+                                                tipoproducto, idalmacen, idunidad, peso, costo);
+                                        lbj.LBJ.Login.escritorio.producto.refreshProductTable();
+                                        //this.setVisible(false);
+                                        JOptionPane.showMessageDialog(null, "El producto se registró existosamente.");
+                                        this.dispose();
+                                        
+                                        mycontroladorseguridad.insertarlog(usuario, new Date(), "Insertar", "Producto", "Insertar Producto");
+                                    }
+                                } else {
+                                    Float smax = Float.parseFloat(stockmaximo);
+                                    mycontroladoralmacen.guardaproducto(nombre, descripcion, stock, smin, smax, estado,
+                                            tipoproducto, idalmacen, idunidad, peso, costo);
+                                    lbj.LBJ.Login.escritorio.producto.refreshProductTable();
+                                    //this.setVisible(false);
+                                    JOptionPane.showMessageDialog(null, "El producto se registró existosamente.");
+                                    this.dispose();
+                                    
+                                    mycontroladorseguridad.insertarlog(usuario, new Date(), "Insertar", "Producto", "Insertar Producto");
+                                }
+                            }
+                        } else {
+                            Float smax = Float.parseFloat(stockmaximo);
+                            mycontroladoralmacen.guardaproducto(nombre, descripcion, stock, smin, smax, estado,
+                                    tipoproducto, idalmacen, idunidad, peso, costo);
+                            lbj.LBJ.Login.escritorio.producto.refreshProductTable();
+                            JOptionPane.showMessageDialog(null, "El producto se registró existosamente.");
+                            //this.setVisible(false);
+                            this.dispose();
+                            
+                            mycontroladorseguridad.insertarlog(usuario, new Date(), "Insertar", "Producto", "Insertar Producto");
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipoproducto = jComboBox1.getSelectedItem().toString();
+                if (tipoproducto.equalsIgnoreCase("Producto Intermedio")) {
+                    jTextField4.enable(true);
+                    jTextField3.enable(false);
+                } else if (tipoproducto.equalsIgnoreCase("Producto Terminado")) {
+                    jTextField4.enable(true);
+                    jTextField3.enable(true);
+                } else {
+                    jTextField4.enable(false);
+                    jTextField3.enable(false);
+                }
+            }
+        });
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+//        jComboBox2.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                //jComboBox1.removeAllItems();
+//                List<Tipoproducto> tp = new ArrayList<Tipoproducto>();
+//                tp = mycontroladoralmacen.sacatipoproducto();
+//                String seleccionalmacen = jComboBox2.getSelectedItem().toString();
+//
+//                if (seleccionalmacen.equalsIgnoreCase("Principal")) {
+//                    System.out.println("Entro aqui Principal");
+//                    int i=0;
+//                    for (i = 0; i < tp.size(); i++) {
+//                        if (tp.get(i).getIdtipoproducto() == 1
+//                                || tp.get(i).getIdtipoproducto() == 2) {
+//                            jComboBox1.insertItemAt(tp.get(i).getNombre(), i);
+//                        }
+//                    }
+//                    int cantidad = jComboBox1.getItemCount();
+//                    System.out.println(cantidad);
+//                     for(int j=2; j<=cantidad; j++){
+//                        jComboBox1.removeItem(j);
+//                    }   
+//                    
+//                     
+//                    jComboBox1.setSelectedIndex(0);
+//                    jTextField4.setText("");
+//                    jTextField3.setText("");
+//                    //jTextField4.enable(false);
+//                    //jTextField3.enable(false);
+//                    System.out.println("salio aqui Principal");
+//                } else {
+//                    System.out.println("Entro aqui Produccion");
+//                    int i=0;
+//                    for (i = 0; i < tp.size(); i++) {
+//                        if (tp.get(i).getIdtipoproducto() == 3
+//                                || tp.get(i).getIdtipoproducto() == 4) {
+//                            jComboBox1.insertItemAt(tp.get(i).getNombre(), i);
+//                        }
+//                    }
+//                    int cantidad = jComboBox1.getItemCount();
+//                    System.out.println(cantidad);
+//                    for(int j=2; j<cantidad; j++){
+//                        jComboBox1.removeItem(j);
+//                    }
+//                    
+//                    jComboBox1.setSelectedIndex(0);
+//                    //jTextField4.enable(true);
+//                    //jTextField3.enable(true);
+//                    System.out.println("salio aqui Produccion");
+//                }
+//            }
+//        });
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField8;
+    // End of variables declaration//GEN-END:variables
+}

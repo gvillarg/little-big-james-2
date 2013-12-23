@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Turno" table="turno" schema="public">
+        <id name="idturno" type="int">
+            <column name="idturno" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del turno.</comment>
+            </column>
+        </property>
+        <property name="horainicio" type="time">
+            <column name="horainicio" length="15">
+                <comment>Es la hora de inicio del turno.</comment>
+            </column>
+        </property>
+        <property name="horafin" type="time">
+            <column name="horafin" length="15">
+                <comment>Es la hora fin del turno.</comment>
+            </column>
+        </property>
+        <set name="asignacionxempleados" inverse="true">
+            <key>
+                <column name="idturno" not-null="true">
+                    <comment>Identificar del turno.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxempleado" />
+        </set>
+        <set name="desempenos" inverse="true">
+            <key>
+                <column name="idturno" not-null="true">
+                    <comment>Identificar del turno.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Desempeno" />
+        </set>
+    </class>
+</hibernate-mapping>

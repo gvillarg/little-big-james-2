@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Parametrosalgoritmo" table="parametrosalgoritmo" schema="public">
+        <id name="idparametrosalgoritmo" type="int">
+            <column name="idparametrosalgoritmo" />
+            <generator class="assigned" />
+        </id>
+        <property name="alfa" type="float">
+            <column name="alfa" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="numiteraciones" type="int">
+            <column name="numiteraciones" not-null="true" />
+        </property>
+        <property name="maxciclossincambiar" type="int">
+            <column name="maxciclossincambiar" not-null="true" />
+        </property>
+        <property name="tampoblacioninicial" type="int">
+            <column name="tampoblacioninicial" not-null="true" />
+        </property>
+        <property name="tammaxpoblacion" type="int">
+            <column name="tammaxpoblacion" not-null="true" />
+        </property>
+        <property name="tasacasamiento" type="float">
+            <column name="tasacasamiento" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="tasamutacion" type="float">
+            <column name="tasamutacion" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="numhilos" type="int">
+            <column name="numhilos" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

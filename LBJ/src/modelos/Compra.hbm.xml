@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Compra" table="compra" schema="public">
+        <id name="idcompra" type="int">
+            <column name="idcompra" />
+            <generator class="sequence">
+                <param name="sequence">compra_idcompra_seq_1</param>
+            </generator>
+        </id>
+        <many-to-one name="proveedor" class="modelos.Proveedor" fetch="select">
+            <column name="idproveedor" not-null="true">
+                <comment>Es el proveedor asociado a la compra.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecharegistro" type="date">
+            <column name="fecharegistro" length="13">
+                <comment>Es la fecha de registro de la compra.</comment>
+            </column>
+        </property>
+        <property name="fechaacordada" type="date">
+            <column name="fechaacordada" length="13">
+                <comment>Es la fecha acordada de la compra.</comment>
+            </column>
+        </property>
+        <property name="fechareal" type="date">
+            <column name="fechareal" length="13">
+                <comment>Es la fecha real de la compra.</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado">
+                <comment>Es el estado de la compra.</comment>
+            </column>
+        </property>
+        <property name="precioacordado" type="java.lang.Float">
+            <column name="precioacordado" precision="8" scale="8">
+                <comment>Es el precio acordado de la compra.</comment>
+            </column>
+        </property>
+        <set name="movimientos" inverse="true">
+            <key>
+                <column name="idcompra">
+                    <comment>Identificador de la compra.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movimiento" />
+        </set>
+        <set name="detallecompras" inverse="true">
+            <key>
+                <column name="idcompra" not-null="true">
+                    <comment>Es la compra relacionada a un detalle de compra.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detallecompra" />
+        </set>
+    </class>
+</hibernate-mapping>

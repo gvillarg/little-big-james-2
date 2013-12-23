@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Cliente" table="cliente" schema="public">
+        <id name="idcliente" type="int">
+            <column name="idcliente" />
+            <generator class="sequence">
+                 <param name="sequence">cliente_idcliente_seq</param>
+            </generator>
+        </id>
+        <property name="razonsocial" type="string">
+            <column name="razonsocial">
+                <comment>Es la raz?n social del cliente.</comment>
+            </column>
+        </property>
+        <property name="ruc" type="java.lang.Long">
+            <column name="ruc">
+                <comment>Es el ruc del cliente.</comment>
+            </column>
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion">
+                <comment>Es la direcci?n del cliente.</comment>
+            </column>
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono">
+                <comment>Es el tel?fono del cliente.</comment>
+            </column>
+        </property>
+        <property name="correo" type="string">
+            <column name="correo">
+                <comment>Es el correo del cliente.</comment>
+            </column>
+        </property>
+        <property name="dnicontacto" type="string">
+            <column name="dnicontacto">
+                <comment>Es el dni del contacto de cliente.</comment>
+            </column>
+        </property>
+        <property name="nombrecontacto" type="string">
+            <column name="nombrecontacto">
+                <comment>Es el nombre del contacto del cliente.</comment>
+            </column>
+        </property>
+        <property name="telefonocontacto" type="java.lang.Integer">
+            <column name="telefonocontacto">
+                <comment>Es el tel?fono del contacto del cliente.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="direccion1" type="string">
+            <column name="direccion_1" not-null="true" />
+        </property>
+        <set name="facturas" inverse="true">
+            <key>
+                <column name="idcliente" not-null="true">
+                    <comment>Identificador del cliente.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Factura" />
+        </set>
+        <set name="ventas" inverse="true">
+            <key>
+                <column name="idcliente" not-null="true">
+                    <comment>Es el cliente asociado a una venta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Venta" />
+        </set>
+    </class>
+</hibernate-mapping>

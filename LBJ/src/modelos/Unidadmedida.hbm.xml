@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Unidadmedida" table="unidadmedida" schema="public">
+        <id name="idunidadmedida" type="int">
+            <column name="idunidadmedida" />
+            <generator class="sequence">
+                 <param name="sequence">unidadmedida_idunidadmedida_seq_1</param>
+            </generator>
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n de una unidad de medida.</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true">
+                <comment>Es el nombre de la unidad de medida.</comment>
+            </column>
+        </property>
+        <set name="productos" inverse="true">
+            <key>
+                <column name="idunidadmedida" not-null="true">
+                    <comment>Es la unidad de medida relaciona a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Producto" />
+        </set>
+    </class>
+</hibernate-mapping>

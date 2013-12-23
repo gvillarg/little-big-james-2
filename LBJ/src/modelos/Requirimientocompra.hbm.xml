@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Requirimientocompra" table="requirimientocompra" schema="public">
+        <id name="idreqerimientocompra" type="int">
+            <column name="idreqerimientocompra" />
+            <generator class="sequence">
+                <param name="sequence">requirimientocompra_idreqerimientocompra_seq</param>
+            </generator>
+        </id>
+        <property name="fechaemision" type="date">
+            <column name="fechaemision" length="13">
+                <comment>Es la fecha de emisi?n del requerimiento de compra.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true">
+                <comment>Es el estado del requerimiento de compra.</comment>
+            </column>
+        </property>
+        <set name="requerimientocompraxproductos" inverse="true">
+            <key>
+                <column name="idreqerimientocompra" not-null="true">
+                    <comment>Es el requermiento de compra asociado a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Requerimientocompraxproducto" />
+        </set>
+    </class>
+</hibernate-mapping>

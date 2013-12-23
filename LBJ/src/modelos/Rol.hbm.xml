@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Rol" table="rol" schema="public">
+        <id name="idrol" type="int">
+            <column name="idrol" />
+            <generator class="sequence">
+                <param name="sequence">rol_idrol_seq_1</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del rol.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n del rol.</comment>
+            </column>
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado">
+                <comment>Es el estado del rol.</comment>
+            </column>
+        </property>
+        <set name="usuarios" inverse="true">
+            <key>
+                <column name="idrol" not-null="true">
+                    <comment>Rol relacionado al usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Usuario" />
+        </set>
+        <set name="vistaxrols" inverse="true">
+            <key>
+                <column name="idrol" not-null="true">
+                    <comment>Rol relacionado a una vista.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Vistaxrol" />
+        </set>
+    </class>
+</hibernate-mapping>

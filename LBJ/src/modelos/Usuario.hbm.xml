@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Usuario" table="usuario" schema="public">
+        <id name="idempleado" type="int">
+            <column name="idempleado" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="empleado" class="modelos.Empleado" update="false" insert="false" fetch="select">
+            <column name="idempleado" not-null="true" unique="true">
+                <comment>Identificador del usuario del sistema.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="rol" class="modelos.Rol" fetch="select">
+            <column name="idrol" not-null="true">
+                <comment>Rol relacionado al usuario</comment>
+            </column>
+        </many-to-one>
+        <property name="nombreusuario" type="string">
+            <column name="nombreusuario" not-null="true">
+                <comment>Es el nombre del usuario</comment>
+            </column>
+        </property>
+        <property name="password" type="string">
+            <column name="password" not-null="true">
+                <comment>Es el pasword del usuario</comment>
+            </column>
+        </property>
+        <property name="correo" type="string">
+            <column name="correo">
+                <comment>Es el correo del usuario.</comment>
+            </column>
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado">
+                <comment>Es el estado del usuario.</comment>
+            </column>
+        </property>
+        <set name="logs" inverse="true">
+            <key>
+                <column name="idempleado" not-null="true">
+                    <comment>Es el empleado relacionado al log.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Log" />
+        </set>
+    </class>
+</hibernate-mapping>

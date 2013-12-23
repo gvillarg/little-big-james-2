@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Venta" table="venta" schema="public">
+        <id name="idventa" type="int">
+            <column name="idventa" />
+            <generator class="sequence">
+                 <param name="sequence">venta_idventa_seq_1</param>
+            </generator>
+        </id>
+        <many-to-one name="cliente" class="modelos.Cliente" fetch="select">
+            <column name="idcliente" not-null="true">
+                <comment>Es el cliente asociado a una venta.</comment>
+            </column>
+        </many-to-one>
+        <property name="precioacordado" type="java.lang.Float">
+            <column name="precioacordado" precision="8" scale="8">
+                <comment>Es el precio acordado de la venta.</comment>
+            </column>
+        </property>
+        <property name="igv" type="java.lang.Float">
+            <column name="igv" precision="8" scale="8">
+                <comment>Es el igv de la venta.</comment>
+            </column>
+        </property>
+        <property name="fecharegistro" type="date">
+            <column name="fecharegistro" length="13">
+                <comment>Es la fecha registro de la venta.</comment>
+            </column>
+        </property>
+        <property name="fechaentregaacordada" type="date">
+            <column name="fechaentregaacordada" length="13">
+                <comment>Es la fecha acordada de la venta.</comment>
+            </column>
+        </property>
+        <property name="fechaentregareal" type="date">
+            <column name="fechaentregareal" length="13">
+                <comment>Es la fecha de entrega real de la venta.</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado">
+                <comment>Es el estado de la venta.</comment>
+            </column>
+        </property>
+        <set name="movimientos" inverse="true">
+            <key>
+                <column name="idventa">
+                    <comment>Identificador de la venta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movimiento" />
+        </set>
+        <set name="detalleventas" inverse="true">
+            <key>
+                <column name="idventa" not-null="true">
+                    <comment>Es la venta asociada a un detalle de venta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detalleventa" />
+        </set>
+    </class>
+</hibernate-mapping>

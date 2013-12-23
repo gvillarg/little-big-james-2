@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Produccionxempleado" table="produccionxempleado" schema="public">
+        <composite-id name="id" class="modelos.ProduccionxempleadoId">
+            <key-property name="idproduccion" type="int">
+                <column name="idproduccion" />
+            </key-property>
+            <key-property name="idasignacion" type="int">
+                <column name="idasignacion" />
+            </key-property>
+            <key-property name="idempleado" type="int">
+                <column name="idempleado" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="produccion" class="modelos.Produccion" update="false" insert="false" fetch="select">
+            <column name="idproduccion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="asignacionxempleado" class="modelos.Asignacionxempleado" update="false" insert="false" fetch="select">
+            <column name="idasignacion" not-null="true">
+                <comment>Identificador de asignacion</comment>
+            </column>
+            <column name="idempleado" not-null="true">
+                <comment>Identificador de un empleado.</comment>
+            </column>
+        </many-to-one>
+        <property name="produccion_1" type="float">
+            <column name="produccion" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="merma" type="float">
+            <column name="merma" precision="8" scale="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

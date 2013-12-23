@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Empleado" table="empleado" schema="public">
+        <id name="idempleado" type="int">
+            <column name="idempleado" />
+            <generator class="sequence">
+                 <param name="sequence">empleado_idempleado_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="tipoempleado" class="modelos.Tipoempleado" fetch="select">
+            <column name="idtipoempleado" not-null="true">
+                <comment>Es el tipo de empleado asociado al empleado.</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del empleado.</comment>
+            </column>
+        </property>
+        <property name="appaterno" type="string">
+            <column name="appaterno">
+                <comment>Es el apellido paterno del empleado.</comment>
+            </column>
+        </property>
+        <property name="apmaterno" type="string">
+            <column name="apmaterno">
+                <comment>Es el apellido materno del empleado.</comment>
+            </column>
+        </property>
+        <property name="fechanacimiento" type="date">
+            <column name="fechanacimiento" length="13" not-null="true" />
+        </property>
+        <property name="fechacontrato" type="date">
+            <column name="fechacontrato" length="13" />
+        </property>
+        <property name="genero" type="int">
+            <column name="genero" not-null="true" />
+        </property>
+        <property name="dni" type="int">
+            <column name="dni" not-null="true" />
+        </property>
+        <property name="sueldo" type="java.lang.Float">
+            <column name="sueldo" precision="8" scale="8">
+                <comment>Es el sueldo del empleado.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="usuarios" inverse="true">
+            <key>
+                <column name="idempleado" not-null="true" unique="true">
+                    <comment>Identificador del usuario del sistema.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Usuario" />
+        </set>
+        <set name="desempenos" inverse="true">
+            <key>
+                <column name="idempleado" not-null="true">
+                    <comment>Identificador de un empleado.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Desempeno" />
+        </set>
+        <set name="asignacionxempleados" inverse="true">
+            <key>
+                <column name="idempleado" not-null="true">
+                    <comment>Identificador de un empleado.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxempleado" />
+        </set>
+    </class>
+</hibernate-mapping>

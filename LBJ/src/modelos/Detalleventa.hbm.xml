@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Detalleventa" table="detalleventa" schema="public">
+        <id name="iddetalleventa" type="int">
+            <column name="iddetalleventa" />
+            <generator class="sequence">
+                 <param name="sequence">detalleventa_iddetalleventa_seq_1_1</param>
+            </generator>
+        </id>
+        <many-to-one name="venta" class="modelos.Venta" fetch="select">
+            <column name="idventa" not-null="true">
+                <comment>Es la venta asociada a un detalle de venta.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto asociado al detalle de una venta.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13">
+                <comment>Es la fecha del detalle de una venta.</comment>
+            </column>
+        </property>
+        <property name="cantidad" type="float">
+            <column name="cantidad" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="preciounitario" type="float">
+            <column name="preciounitario" precision="8" scale="8" not-null="true" />
+        </property>
+        <set name="detallefacturas" inverse="true">
+            <key>
+                <column name="iddetalleventa" not-null="true">
+                    <comment>Identificador del detalle de la venta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detallefactura" />
+        </set>
+    </class>
+</hibernate-mapping>

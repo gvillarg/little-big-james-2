@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/11/2013 08:53:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Movimiento" table="movimiento" schema="public">
+        <id name="idmovimiento" type="int">
+            <column name="idmovimiento" />
+            <generator class="sequence">
+                 <param name="sequence">movimiento_idmovimiento_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="venta" class="modelos.Venta" fetch="select">
+            <column name="idventa">
+                <comment>Identificador de la venta.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="almacen" class="modelos.Almacen" fetch="select">
+            <column name="idalmacen" not-null="true">
+                <comment>Es el almac&#233;n relacionado al movimiento.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="produccion" class="modelos.Produccion" fetch="select">
+            <column name="idproduccion" />
+        </many-to-one>
+        <many-to-one name="compra" class="modelos.Compra" fetch="select">
+            <column name="idcompra">
+                <comment>Identificador de la compra.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="motivo" class="modelos.Motivo" fetch="select">
+            <column name="idmotivo" not-null="true">
+                <comment>Identificador del motivo.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Es la fecha del movimiento.</comment>
+            </column>
+        </property>
+        <property name="tipo" type="int">
+            <column name="tipo" not-null="true">
+                <comment>Es el tipo del movimiento.</comment>
+            </column>
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado">
+                <comment>Es el estado del movimiento.</comment>
+            </column>
+        </property>
+        <set name="productoxmovimientos" inverse="true">
+            <key>
+                <column name="idmovimiento" not-null="true">
+                    <comment>Es el movimiento asociado a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxmovimiento" />
+        </set>
+        <set name="movsalidadetalles" inverse="true">
+            <key>
+                <column name="idmovimientoe" not-null="true">
+                    <comment>Es el identificador del movimiento.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movsalidadetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

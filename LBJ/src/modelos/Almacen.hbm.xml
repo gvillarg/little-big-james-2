@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Almacen" table="almacen" schema="public">
+        <id name="idalmacen" type="int">
+            <column name="idalmacen" />
+            <generator class="sequence">
+                 <param name="sequence">almacen_idalmacen_seq_1</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true">
+                <comment>Es el nombre del almac?n.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" not-null="true">
+                <comment>Es la descripci?n del almac?n.</comment>
+            </column>
+        </property>
+        <property name="capacidad" type="java.lang.Integer">
+            <column name="capacidad">
+                <comment>Es la capacidad del almac?n.</comment>
+            </column>
+        </property>
+        <property name="area" type="java.lang.Float">
+            <column name="area" precision="8" scale="8">
+                <comment>Es el ?rea del almac?n.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true">
+                <comment>Almacen activo o inactivo</comment>
+            </column>
+        </property>
+        <set name="productos" inverse="true">
+            <key>
+                <column name="idalmacen" not-null="true">
+                    <comment>Es el amac?n relacionado a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Producto" />
+        </set>
+        <set name="movimientos" inverse="true">
+            <key>
+                <column name="idalmacen" not-null="true">
+                    <comment>Es el almac?n relacionado al movimiento.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movimiento" />
+        </set>
+    </class>
+</hibernate-mapping>

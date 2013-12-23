@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Factura" table="factura" schema="public">
+        <id name="idfactura" type="int">
+            <column name="idfactura" />
+            <generator class="sequence">
+                 <param name="sequence">factura_idfactura_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="cliente" class="modelos.Cliente" fetch="select">
+            <column name="idcliente" not-null="true">
+                <comment>Identificador del cliente.</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaemision" type="date">
+            <column name="fechaemision" length="13" not-null="true" />
+        </property>
+        <property name="direccionentrega" type="string">
+            <column name="direccionentrega" />
+        </property>
+        <property name="pesototal" type="java.lang.Float">
+            <column name="pesototal" precision="8" scale="8" />
+        </property>
+        <property name="subtotal" type="float">
+            <column name="subtotal" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="igv" type="float">
+            <column name="igv" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="total" type="float">
+            <column name="total" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="detallefacturas" inverse="true">
+            <key>
+                <column name="idfactura" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Detallefactura" />
+        </set>
+    </class>
+</hibernate-mapping>

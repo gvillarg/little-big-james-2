@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Receta" table="receta" schema="public">
+        <id name="idreceta" type="int">
+            <column name="idreceta" />
+            <generator class="sequence">
+                 <param name="sequence">receta_idreceta_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="actividad" class="modelos.Actividad" fetch="select">
+            <column name="idactividad" not-null="true">
+                <comment>Identificador de la actividad.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Identificador del producto.</comment>
+            </column>
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n dela receta.</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" not-null="true">
+                <comment>Es el nombre de la receta.</comment>
+            </column>
+        </property>
+        <set name="productoxrecetas" inverse="true">
+            <key>
+                <column name="idreceta" not-null="true">
+                    <comment>Es la receta relacionada a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxreceta" />
+        </set>
+    </class>
+</hibernate-mapping>

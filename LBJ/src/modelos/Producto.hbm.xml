@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Producto" table="producto" schema="public">
+        <id name="idproducto" type="int">
+            <column name="idproducto" />
+            <generator class="sequence">
+                 <param name="sequence">producto_idproducto_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="almacen" class="modelos.Almacen" fetch="select">
+            <column name="idalmacen" not-null="true">
+                <comment>Es el amac?n relacionado a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tipoproducto" class="modelos.Tipoproducto" fetch="select">
+            <column name="idtipoproducto" not-null="true">
+                <comment>Es el tipo de producto relacionado a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="unidadmedida" class="modelos.Unidadmedida" fetch="select">
+            <column name="idunidadmedida" not-null="true">
+                <comment>Es la unidad de medida relaciona a un producto.</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del producto.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n del producto.</comment>
+            </column>
+        </property>
+        <property name="stock" type="float">
+            <column name="stock" precision="8" scale="8" not-null="true">
+                <comment>Es el stock del producto.</comment>
+            </column>
+        </property>
+        <property name="stockcomprometido" type="float">
+            <column name="stockcomprometido" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="stocksolicitado" type="float">
+            <column name="stocksolicitado" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="stockminimo" type="float">
+            <column name="stockminimo" precision="8" scale="8" not-null="true">
+                <comment>Es el stock m?nimo del producto.</comment>
+            </column>
+        </property>
+        <property name="stockmaximo" type="float">
+            <column name="stockmaximo" precision="8" scale="8" not-null="true">
+                <comment>Es el stock m?ximo del producto.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true">
+                <comment>Estado del producto eliminado o activo</comment>
+            </column>
+        </property>
+        <property name="costo" type="java.lang.Float">
+            <column name="costo" precision="8" scale="8" />
+        </property>
+        <property name="peso" type="java.lang.Float">
+            <column name="peso" precision="8" scale="8" />
+        </property>
+        <set name="asignacionxproductos" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Identificador del producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxproducto" />
+        </set>
+        <set name="requerimientocompraxproductos" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto relacionado a un requerimiento de compra.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Requerimientocompraxproducto" />
+        </set>
+        <set name="recetas" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Identificador del producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Receta" />
+        </set>
+        <set name="productoxmovimientos" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto asociado a un movimiento.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxmovimiento" />
+        </set>
+        <set name="productoxproveedors" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto relacionado a un proveedor.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxproveedor" />
+        </set>
+        <set name="detalleordenproduccions" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Identificador del producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detalleordenproduccion" />
+        </set>
+        <set name="asignacionxempleados" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Identificador del producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxempleado" />
+        </set>
+        <set name="detalleventas" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto asociado al detalle de una venta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detalleventa" />
+        </set>
+        <set name="productoxrecetas" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto relacionado a una receta.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxreceta" />
+        </set>
+    </class>
+</hibernate-mapping>

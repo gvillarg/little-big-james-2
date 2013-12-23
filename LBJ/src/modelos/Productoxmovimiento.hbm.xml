@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Productoxmovimiento" table="productoxmovimiento" schema="public">
+        <composite-id name="id" class="modelos.ProductoxmovimientoId">
+            <key-property name="idproducto" type="int">
+                <column name="idproducto" />
+            </key-property>
+            <key-property name="idmovimiento" type="int">
+                <column name="idmovimiento" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="movimiento" class="modelos.Movimiento" update="false" insert="false" fetch="select">
+            <column name="idmovimiento" not-null="true">
+                <comment>Es el movimiento asociado a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" update="false" insert="false" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto asociado a un movimiento.</comment>
+            </column>
+        </many-to-one>
+        <property name="fvencimiento" type="date">
+            <column name="fvencimiento" length="13" not-null="true">
+                <comment>Es la fecha de vencimiento del producto en un moviento.</comment>
+            </column>
+        </property>
+        <property name="stock" type="float">
+            <column name="stock" precision="8" scale="8" not-null="true">
+                <comment>Es el stock de un producto en un movmiento.</comment>
+            </column>
+        </property>
+        <property name="stockactual" type="float">
+            <column name="stockactual" precision="8" scale="8" not-null="true">
+                <comment>Es el stock actual de un producto en un movimiento.</comment>
+            </column>
+        </property>
+        <set name="movsalidadetalles" inverse="true">
+            <key>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto asociado a un movimiento.</comment>
+                </column>
+                <column name="idmovimientos" not-null="true">
+                    <comment>Es el movimiento asociado a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movsalidadetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

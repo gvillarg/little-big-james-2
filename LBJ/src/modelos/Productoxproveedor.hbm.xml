@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Productoxproveedor" table="productoxproveedor" schema="public">
+        <composite-id name="id" class="modelos.ProductoxproveedorId">
+            <key-property name="idproducto" type="int">
+                <column name="idproducto" />
+            </key-property>
+            <key-property name="idproveedor" type="int">
+                <column name="idproveedor" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="proveedor" class="modelos.Proveedor" update="false" insert="false" fetch="select">
+            <column name="idproveedor" not-null="true">
+                <comment>Es el proveedor relacionado a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" update="false" insert="false" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto relacionado a un proveedor.</comment>
+            </column>
+        </many-to-one>
+        <property name="precio" type="java.lang.Float">
+            <column name="precio" precision="8" scale="8">
+                <comment>Es el precio de un producto asociado a un proveedor.</comment>
+            </column>
+        </property>
+        <property name="cantidadmaxima" type="java.lang.Integer">
+            <column name="cantidadmaxima">
+                <comment>Es la cantidad m?xima de un producto que puede dar un proveedor.</comment>
+            </column>
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13">
+                <comment>Es la fecha de vigencia del precio del producto asociado a un proveedor.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

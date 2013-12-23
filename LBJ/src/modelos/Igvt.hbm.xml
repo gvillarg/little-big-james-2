@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Igvt" table="igvt" schema="public">
+        <id name="idigv" type="int">
+            <column name="idigv" />
+            <generator class="sequence">
+                 <param name="sequence">igvt_idigv_seq</param>
+            </generator>
+        </id>
+        <property name="porcentaje" type="java.lang.Float">
+            <column name="porcentaje" precision="8" scale="8" />
+        </property>
+        <property name="fechainiciovigencia" type="date">
+            <column name="fechainiciovigencia" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

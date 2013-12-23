@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="postgres" match-schema="public"/>
+  <table-filter match-name="tipoempleado"/>
+  <table-filter match-name="log"/>
+  <table-filter match-name="empleado"/>
+  <table-filter match-name="movimiento"/>
+  <table-filter match-name="vista"/>
+  <table-filter match-name="igvt"/>
+  <table-filter match-name="detalleventa"/>
+  <table-filter match-name="parametrosalgoritmo"/>
+  <table-filter match-name="turno"/>
+  <table-filter match-name="almacen"/>
+  <table-filter match-name="detallefactura"/>
+  <table-filter match-name="productoxproveedor"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="productoxreceta"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="produccion"/>
+  <table-filter match-name="ordenproduccion"/>
+  <table-filter match-name="receta"/>
+  <table-filter match-name="asignacionxproducto"/>
+  <table-filter match-name="productoxmovimiento"/>
+  <table-filter match-name="proveedor"/>
+  <table-filter match-name="produccionxempleado"/>
+  <table-filter match-name="vistaxrol"/>
+  <table-filter match-name="requirimientocompra"/>
+  <table-filter match-name="motivo"/>
+  <table-filter match-name="maquina"/>
+  <table-filter match-name="venta"/>
+  <table-filter match-name="unidadmedida"/>
+  <table-filter match-name="actividad"/>
+  <table-filter match-name="movsalidadetalle"/>
+  <table-filter match-name="detalleordenproduccion"/>
+  <table-filter match-name="desempeno"/>
+  <table-filter match-name="requerimientocompraxproducto"/>
+  <table-filter match-name="factura"/>
+  <table-filter match-name="detallecompra"/>
+  <table-filter match-name="asignacionxempleado"/>
+  <table-filter match-name="compra"/>
+  <table-filter match-name="rol"/>
+  <table-filter match-name="asignacion"/>
+  <table-filter match-name="producto"/>
+  <table-filter match-name="tipoproducto"/>
+  <table-filter match-name="produccionxproducto"/>
+</hibernate-reverse-engineering>

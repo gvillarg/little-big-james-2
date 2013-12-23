@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Log" table="log" schema="public">
+        <id name="idlog" type="int">
+            <column name="idlog" />
+            <generator class="sequence">
+                <param name="sequence">log_idlog_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="usuario" class="modelos.Usuario" fetch="select">
+            <column name="idempleado" not-null="true">
+                <comment>Es el empleado relacionado al log.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true">
+                <comment>Es la fecha de logeo de un usuario.</comment>
+            </column>
+        </property>
+        <property name="accion" type="string">
+            <column name="accion">
+                <comment>Es la acci?n realizada por un usuario durante el logeo.</comment>
+            </column>
+        </property>
+        <property name="tabla" type="string">
+            <column name="tabla">
+                <comment>Es la tabla asociada a la acci?n que realiz? el usuario.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n de la acci?n del usuario.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
