@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Desempeno" table="desempeno" schema="public">
+        <composite-id name="id" class="modelos.DesempenoId">
+            <key-property name="idempleado" type="int">
+                <column name="idempleado" />
+            </key-property>
+            <key-property name="idactividad" type="int">
+                <column name="idactividad" />
+            </key-property>
+            <key-property name="idturno" type="int">
+                <column name="idturno" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="actividad" class="modelos.Actividad" update="false" insert="false" fetch="select">
+            <column name="idactividad" not-null="true">
+                <comment>Identificador de la actividad.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="empleado" class="modelos.Empleado" update="false" insert="false" fetch="select">
+            <column name="idempleado" not-null="true">
+                <comment>Identificador de un empleado.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="turno" class="modelos.Turno" update="false" insert="false" fetch="select">
+            <column name="idturno" not-null="true">
+                <comment>Identificar del turno.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="produccion" type="float">
+            <column name="produccion" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="merma" type="float">
+            <column name="merma" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="numdatos" type="int">
+            <column name="numdatos" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

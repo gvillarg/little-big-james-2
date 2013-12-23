@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Detallefactura" table="detallefactura" schema="public">
+        <id name="iddetallefactura" type="int">
+            <column name="iddetallefactura" />
+            <generator class="sequence">
+                 <param name="sequence">detallefactura_iddetallefactura_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="detalleventa" class="modelos.Detalleventa" fetch="select">
+            <column name="iddetalleventa" not-null="true">
+                <comment>Identificador del detalle de la venta.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="factura" class="modelos.Factura" fetch="select">
+            <column name="idfactura" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

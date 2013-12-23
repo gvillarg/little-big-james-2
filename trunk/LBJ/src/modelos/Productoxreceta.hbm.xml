@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Productoxreceta" table="productoxreceta" schema="public">
+        <composite-id name="id" class="modelos.ProductoxrecetaId">
+            <key-property name="idproducto" type="int">
+                <column name="idproducto" />
+            </key-property>
+            <key-property name="idreceta" type="int">
+                <column name="idreceta" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="receta" class="modelos.Receta" update="false" insert="false" fetch="select">
+            <column name="idreceta" not-null="true">
+                <comment>Es la receta relacionada a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" update="false" insert="false" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto relacionado a una receta.</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidad" type="float">
+            <column name="cantidad" precision="8" scale="8" not-null="true">
+                <comment>Es la cantidad de un producto en una receta.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

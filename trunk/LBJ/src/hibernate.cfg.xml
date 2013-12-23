@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://quilla.lab.inf.pucp.edu.pe:1042/postgres</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">empaques</property>
+    <mapping resource="modelos/Cliente.hbm.xml"/>
+    <mapping resource="modelos/Detalleventa.hbm.xml"/>
+    <mapping resource="modelos/Asignacion.hbm.xml"/>
+    <mapping resource="modelos/Vistaxrol.hbm.xml"/>
+    <mapping resource="modelos/Producto.hbm.xml"/>
+    <mapping resource="modelos/Productoxmovimiento.hbm.xml"/>
+    <mapping resource="modelos/Vista.hbm.xml"/>
+    <mapping resource="modelos/Usuario.hbm.xml"/>
+    <mapping resource="modelos/Receta.hbm.xml"/>
+    <mapping resource="modelos/Detallefactura.hbm.xml"/>
+    <mapping resource="modelos/Compra.hbm.xml"/>
+    <mapping resource="modelos/Empleado.hbm.xml"/>
+    <mapping resource="modelos/Detallecompra.hbm.xml"/>
+    <mapping resource="modelos/Proveedor.hbm.xml"/>
+    <mapping resource="modelos/Desempeno.hbm.xml"/>
+    <mapping resource="modelos/Detalleordenproduccion.hbm.xml"/>
+    <mapping resource="modelos/Motivo.hbm.xml"/>
+    <mapping resource="modelos/Venta.hbm.xml"/>
+    <mapping resource="modelos/Productoxproveedor.hbm.xml"/>
+    <mapping resource="modelos/Igvt.hbm.xml"/>
+    <mapping resource="modelos/Actividad.hbm.xml"/>
+    <mapping resource="modelos/Requirimientocompra.hbm.xml"/>
+    <mapping resource="modelos/Produccionxempleado.hbm.xml"/>
+    <mapping resource="modelos/Rol.hbm.xml"/>
+    <mapping resource="modelos/Produccion.hbm.xml"/>
+    <mapping resource="modelos/Produccionxproducto.hbm.xml"/>
+    <mapping resource="modelos/Log.hbm.xml"/>
+    <mapping resource="modelos/Turno.hbm.xml"/>
+    <mapping resource="modelos/Factura.hbm.xml"/>
+    <mapping resource="modelos/Almacen.hbm.xml"/>
+    <mapping resource="modelos/Parametrosalgoritmo.hbm.xml"/>
+    <mapping resource="modelos/Requerimientocompraxproducto.hbm.xml"/>
+    <mapping resource="modelos/Unidadmedida.hbm.xml"/>
+    <mapping resource="modelos/Ordenproduccion.hbm.xml"/>
+    <mapping resource="modelos/Asignacionxproducto.hbm.xml"/>
+    <mapping resource="modelos/Tipoproducto.hbm.xml"/>
+    <mapping resource="modelos/Tipoempleado.hbm.xml"/>
+    <mapping resource="modelos/Productoxreceta.hbm.xml"/>
+    <mapping resource="modelos/Movimiento.hbm.xml"/>
+    <mapping resource="modelos/Movsalidadetalle.hbm.xml"/>
+    <mapping resource="modelos/Asignacionxempleado.hbm.xml"/>
+    <mapping resource="modelos/Maquina.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

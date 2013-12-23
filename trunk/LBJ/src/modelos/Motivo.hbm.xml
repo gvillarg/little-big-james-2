@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Motivo" table="motivo" schema="public">
+        <id name="idmotivo" type="int">
+            <column name="idmotivo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del motivo.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n del motivo.</comment>
+            </column>
+        </property>
+        <set name="movimientos" inverse="true">
+            <key>
+                <column name="idmotivo" not-null="true">
+                    <comment>Identificador del motivo.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Movimiento" />
+        </set>
+    </class>
+</hibernate-mapping>

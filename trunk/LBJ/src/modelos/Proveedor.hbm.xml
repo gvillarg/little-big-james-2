@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Proveedor" table="proveedor" schema="public">
+        <id name="idproveedor" type="int">
+            <column name="idproveedor" />
+            <generator class="sequence">
+                 <param name="sequence">proveedor_idproveedor_seq</param>
+            </generator>
+        </id>
+        <property name="razonsocial" type="string">
+            <column name="razonsocial">
+                <comment>Es la raz?n social del proveedor.</comment>
+            </column>
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion">
+                <comment>Es la direcci?n del proveedor.</comment>
+            </column>
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono">
+                <comment>Es el tel?fono del proveedor.</comment>
+            </column>
+        </property>
+        <property name="correo" type="string">
+            <column name="correo">
+                <comment>Es el correo del proveedor.</comment>
+            </column>
+        </property>
+        <property name="dnicontacto" type="java.lang.Integer">
+            <column name="dnicontacto">
+                <comment>Es el dni del contacto del proveedor.</comment>
+            </column>
+        </property>
+        <property name="nombrecontacto" type="string">
+            <column name="nombrecontacto">
+                <comment>Es el nombre del contacto del proveedor.</comment>
+            </column>
+        </property>
+        <property name="telefonocontacto" type="java.lang.Integer">
+            <column name="telefonocontacto">
+                <comment>Es el tel?fono del contacto del proveedor.</comment>
+            </column>
+        </property>
+        <property name="ruc" type="java.lang.Long">
+            <column name="ruc">
+                <comment>Es el ruc del proveedor.</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="estado">
+                <comment>Es el estado del proveedor.</comment>
+            </column>
+        </property>
+        <set name="productoxproveedors" inverse="true">
+            <key>
+                <column name="idproveedor" not-null="true">
+                    <comment>Es el proveedor relacionado a un producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Productoxproveedor" />
+        </set>
+        <set name="compras" inverse="true">
+            <key>
+                <column name="idproveedor" not-null="true">
+                    <comment>Es el proveedor asociado a la compra.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Compra" />
+        </set>
+    </class>
+</hibernate-mapping>

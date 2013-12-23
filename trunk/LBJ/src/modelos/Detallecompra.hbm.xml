@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Detallecompra" table="detallecompra" schema="public">
+        <id name="iddetallecompra" type="int">
+            <column name="iddetallecompra" />
+            <generator class="sequence">
+                <param name="sequence">detallecompra_iddetallecompra_seq_1</param>
+            </generator>
+        </id>
+        <many-to-one name="requerimientocompraxproducto" class="modelos.Requerimientocompraxproducto" fetch="select">
+            <column name="idreqerimientocompra" not-null="true">
+                <comment>Es el requerimiento de compra asociado al detalle de compra.</comment>
+            </column>
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto asociado a un detalle de compra.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="compra" class="modelos.Compra" fetch="select">
+            <column name="idcompra" not-null="true">
+                <comment>Es la compra relacionada a un detalle de compra.</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13">
+                <comment>Es la fecha relacionada a un detalle de compra.</comment>
+            </column>
+        </property>
+        <property name="precio" type="float">
+            <column name="precio" precision="8" scale="8" not-null="true">
+                <comment>Es el precio del producto a comprar</comment>
+            </column>
+        </property>
+        <property name="cantidad" type="float">
+            <column name="cantidad" precision="8" scale="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

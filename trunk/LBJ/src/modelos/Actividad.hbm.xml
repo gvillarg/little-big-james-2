@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Actividad" table="actividad" schema="public">
+        <id name="idactividad" type="int">
+            <column name="idactividad" />
+            <generator class="sequence">
+                 <param name="sequence">actividad_idactividad_seq_1</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre de la actividad.</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n de la actividad.</comment>
+            </column>
+        </property>
+        <set name="maquinas" inverse="true">
+            <key>
+                <column name="idactividad" not-null="true">
+                    <comment>Es la actividad asociada a una m?quina.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Maquina" />
+        </set>
+        <set name="desempenos" inverse="true">
+            <key>
+                <column name="idactividad" not-null="true">
+                    <comment>Identificador de la actividad.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Desempeno" />
+        </set>
+        <set name="recetas" inverse="true">
+            <key>
+                <column name="idactividad" not-null="true">
+                    <comment>Identificador de la actividad.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Receta" />
+        </set>
+    </class>
+</hibernate-mapping>

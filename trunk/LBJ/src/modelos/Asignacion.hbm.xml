@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Asignacion" table="asignacion" schema="public">
+        <id name="idasignacion" type="int">
+            <column name="idasignacion" />
+            <generator class="sequence">
+                 <param name="sequence">asignacion_idasignacion_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="ordenproduccion" class="modelos.Ordenproduccion" fetch="select">
+            <column name="idordenproduccion" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true">
+                <comment>estado de la asignacion</comment>
+            </column>
+        </property>
+        <property name="fechainicial" type="date">
+            <column name="fechainicial" length="13" not-null="true" />
+        </property>
+        <property name="fechafinal" type="date">
+            <column name="fechafinal" length="13" not-null="true" />
+        </property>
+        <set name="produccions" inverse="true">
+            <key>
+                <column name="idasignacion" not-null="true">
+                    <comment>Identificador de asignacion</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Produccion" />
+        </set>
+        <set name="asignacionxempleados" inverse="true">
+            <key>
+                <column name="idasignacion" not-null="true">
+                    <comment>Identificador de asignacion</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxempleado" />
+        </set>
+        <set name="asignacionxproductos" inverse="true">
+            <key>
+                <column name="idasignacion" not-null="true">
+                    <comment>Identificador de asignacion</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxproducto" />
+        </set>
+    </class>
+</hibernate-mapping>

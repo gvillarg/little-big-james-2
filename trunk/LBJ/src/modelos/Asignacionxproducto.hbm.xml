@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Asignacionxproducto" table="asignacionxproducto" schema="public">
+        <composite-id name="id" class="modelos.AsignacionxproductoId">
+            <key-property name="idasignacion" type="int">
+                <column name="idasignacion" />
+            </key-property>
+            <key-property name="idproducto" type="int">
+                <column name="idproducto" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="producto" class="modelos.Producto" update="false" insert="false" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Identificador del producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="asignacion" class="modelos.Asignacion" update="false" insert="false" fetch="select">
+            <column name="idasignacion" not-null="true">
+                <comment>Identificador de asignacion</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidadrequerida" type="float">
+            <column name="cantidadrequerida" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="produccionestimada" type="float">
+            <column name="produccionestimada" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="mermaestimada" type="float">
+            <column name="mermaestimada" precision="8" scale="8" not-null="true" />
+        </property>
+        <set name="produccionxproductos" inverse="true">
+            <key>
+                <column name="idasignacion" not-null="true">
+                    <comment>Identificador de asignacion</comment>
+                </column>
+                <column name="idproducto" not-null="true">
+                    <comment>Identificador del producto.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Produccionxproducto" />
+        </set>
+    </class>
+</hibernate-mapping>

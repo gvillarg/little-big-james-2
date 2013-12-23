@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Tipoempleado" table="tipoempleado" schema="public">
+        <id name="idtipoempleado" type="int">
+            <column name="idtipoempleado" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre del tipo de empleado</comment>
+            </column>
+        </property>
+        <property name="sueldo" type="java.lang.Float">
+            <column name="sueldo" precision="8" scale="8">
+                <comment>Es el sueldo del tipo de empleado</comment>
+            </column>
+        </property>
+        <set name="empleados" inverse="true">
+            <key>
+                <column name="idtipoempleado" not-null="true">
+                    <comment>Es el tipo de empleado asociado al empleado.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Empleado" />
+        </set>
+    </class>
+</hibernate-mapping>

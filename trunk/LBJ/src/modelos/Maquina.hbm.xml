@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Maquina" table="maquina" schema="public">
+        <id name="idmaquina" type="int">
+            <column name="idmaquina" />
+            <generator class="sequence">
+                 <param name="sequence">maquina_idmaquina_seq_1</param>
+            </generator>
+        </id>
+        <many-to-one name="actividad" class="modelos.Actividad" fetch="select">
+            <column name="idactividad" not-null="true">
+                <comment>Es la actividad asociada a una m?quina.</comment>
+            </column>
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion">
+                <comment>Es la descripci?n de una m?quina.</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre">
+                <comment>Es el nombre de una m?quina.</comment>
+            </column>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true">
+                <comment>Es el estado de una m?quina.</comment>
+            </column>
+        </property>
+        <set name="asignacionxempleados" inverse="true">
+            <key>
+                <column name="idmaquina" not-null="true">
+                    <comment>Identificador de la m?quina.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Asignacionxempleado" />
+        </set>
+    </class>
+</hibernate-mapping>

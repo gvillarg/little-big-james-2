@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Produccion" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="610c89d7-a2aa-4b5c-a407-6ba3a85beae2">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idGalleta" class="java.lang.Integer"/>
+	<parameter name="fechaInicio" class="java.util.Date"/>
+	<parameter name="fechaFin" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM Asignacionxproducto axp, Producto po, Asignacion a , Produccion pn,
+ProduccionxProducto pp
+WHERE axp.idproducto = $P{idGalleta}
+AND axp.idProducto = po.idproducto
+and pp.idProducto = axp.idProducto
+AND axp.idasignacion = a.idasignacion
+AND a.idasignacion = pn.idasignacion
+AND pn.idAsignacion = pp.idAsignacion
+AND a.estado = 3
+AND pn.fecha >= $P{fechaInicio}
+AND pn.fecha <= $P{fechaFin}
+AND po.idtipoproducto = 4
+AND pn.idAsignacion = a.idAsignacion
+AND pn.idProduccion = pp.idProduccion
+ORDER BY a.idasignacion]]>
+	</queryString>
+	<field name="idasignacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Identificador de asignacion]]></fieldDescription>
+	</field>
+	<field name="idproducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Identificador del producto.]]></fieldDescription>
+	</field>
+	<field name="cantidadrequerida" class="java.lang.Float"/>
+	<field name="produccionestimada" class="java.lang.Float"/>
+	<field name="mermaestimada" class="java.lang.Float"/>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[Es el nombre de la actividad.]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[Es la descripción de la actividad.]]></fieldDescription>
+	</field>
+	<field name="stock" class="java.lang.Float">
+		<fieldDescription><![CDATA[Es el stock del producto.]]></fieldDescription>
+	</field>
+	<field name="stockcomprometido" class="java.lang.Float"/>
+	<field name="stocksolicitado" class="java.lang.Float"/>
+	<field name="stockminimo" class="java.lang.Float">
+		<fieldDescription><![CDATA[Es el stock mínimo del producto.]]></fieldDescription>
+	</field>
+	<field name="stockmaximo" class="java.lang.Float">
+		<fieldDescription><![CDATA[Es el stock máximo del producto.]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Almacen activo o inactivo]]></fieldDescription>
+	</field>
+	<field name="idtipoproducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Es el tipo de producto relacionado a un producto.]]></fieldDescription>
+	</field>
+	<field name="idalmacen" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Identificador del almacén.]]></fieldDescription>
+	</field>
+	<field name="idunidadmedida" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Es la unidad de medida relaciona a un producto.]]></fieldDescription>
+	</field>
+	<field name="costo" class="java.lang.Float"/>
+	<field name="peso" class="java.lang.Float"/>
+	<field name="idordenproduccion" class="java.lang.Integer"/>
+	<field name="fechainicial" class="java.sql.Date"/>
+	<field name="fechafinal" class="java.sql.Date"/>
+	<field name="idproduccion" class="java.lang.Integer"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="produccion" class="java.lang.Float"/>
+	<field name="merma" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement uuid="6417aac4-83f5-42bf-9757-2100cd413824" x="10" y="10" width="239" height="126"/>
+				<imageExpression><![CDATA["logoLBJ.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="07f8eb91-c8d4-437a-b66b-7e393001b934" style="Title" x="279" y="10" width="263" height="62" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Reporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a95b26b3-aaf7-4858-ad2f-997e510f0353" style="SubTitle" x="279" y="72" width="263" height="34" forecolor="#663300"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="20" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Produccion Por Galleta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fa5633ed-5224-45fa-b5da-5ee77cc53518" x="279" y="106" width="263" height="30" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Almacén]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="67a30175-ece0-4431-bf0d-8516bd053a88" positionType="FixRelativeToBottom" x="0" y="15" width="550" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="19df49c0-8183-4584-ae0d-6b952b60215b" style="Column header" x="1" y="0" width="46" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd92686e-636a-4acf-833e-f7294d097e5a" style="Column header" x="119" y="1" width="68" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8855de65-afb8-4366-9cad-2829c6473ea8" style="Column header" x="187" y="1" width="117" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Producción Estimada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="73792f14-8e0d-4069-a292-f894f53e638a" style="Column header" x="488" y="0" width="63" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Merma Real]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a156cd55-04ff-4592-b83e-1fec5404c708" style="Column header" x="397" y="1" width="91" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Producción Real]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e1d3c03-05dc-4d2a-8442-4da1cba1d01b" style="Column header" x="47" y="1" width="72" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="954aab41-8c66-413e-8259-3569f62e431b" style="Column header" x="304" y="1" width="93" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Merma Estimada]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement uuid="003700b2-3988-4bd0-88bf-13140d5701d6" style="Row" mode="Opaque" x="-1" y="0" width="550" height="15"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="59320817-4573-49d5-ae0e-2b0fac665658" style="Detail" x="120" y="0" width="68" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0543e6ed-da45-4c6d-8323-aecbcf3bc77c" style="Detail" x="2" y="0" width="46" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idasignacion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="b5be1bd8-7381-4c02-a474-4f705c03f0ff" style="Detail" x="48" y="0" width="72" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fecha}.getDate()+'-'+($F{fecha}.getMonth()+1)+'-'+($F{fecha}.getYear()-100+2000)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="73d4c9b9-6c95-4c97-81f4-579298f5cc63" style="Detail" x="188" y="0" width="117" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produccionestimada}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d45ad1d5-21fe-45a3-909b-578f479c2186" style="Detail" x="305" y="0" width="93" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mermaestimada}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="736f4cc2-1ff3-4d5c-a8b9-f0f7d7f83cdf" x="398" y="0" width="91" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7552ba19-dce1-4998-95ca-51f1d2f51191" x="487" y="0" width="63" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{merma}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="300" splitType="Stretch">
+			<line>
+				<reportElement uuid="bb5cfb16-7ea3-4019-abe3-9ac1f26c85ef" positionType="FixRelativeToBottom" x="0" y="3" width="550" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<barChart>
+				<chart>
+					<reportElement uuid="aff67222-baaa-44f2-a544-35ed52c69747" x="26" y="77" width="253" height="165"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Produccion Estimada"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{fecha}.getDate()+'-'+($F{fecha}.getMonth()+1)+'-'+($F{fecha}.getYear()-100+2000)]]></categoryExpression>
+						<valueExpression><![CDATA[$F{produccionestimada}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Produccion Real"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{fecha}.getDate()+'-'+($F{fecha}.getMonth()+1)+'-'+($F{fecha}.getYear()-100+2000)]]></categoryExpression>
+						<valueExpression><![CDATA[$F{produccion}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<barChart>
+				<chart>
+					<reportElement uuid="932ec919-7561-49b9-b88a-569b9830e3a5" x="324" y="77" width="218" height="165"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Merma Estimada"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{fecha}.getDate()+'-'+($F{fecha}.getMonth()+1)+'-'+($F{fecha}.getYear()-100+2000)]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mermaestimada}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Merma Real"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{fecha}.getDate()+'-'+($F{fecha}.getMonth()+1)+'-'+($F{fecha}.getYear()-100+2000)]]></categoryExpression>
+						<valueExpression><![CDATA[$F{merma}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="79879e86-f2d8-4b51-b116-14d9f23da554" mode="Opaque" x="-21" y="1" width="595" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="be514bef-29fb-47e0-8fc8-7c453288f8b7" style="Column header" x="523" y="1" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="1cdb2ebe-2c4d-49af-b505-36cc42213013" style="Column header" x="443" y="1" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy h.mm a">
+					<reportElement uuid="b6b29175-99b3-4a1e-812c-81c9f9dc0185" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

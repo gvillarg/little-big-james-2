@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Ordenproduccion" table="ordenproduccion" schema="public">
+        <id name="idordenproduccion" type="int">
+            <column name="idordenproduccion" />
+            <generator class="sequence">
+                 <param name="sequence">ordenproduccion_idordenproduccion_seq_1_1</param>
+            </generator>
+        </id>
+        <property name="fechainicio" type="date">
+            <column name="fechainicio" length="13" not-null="true" />
+        </property>
+        <property name="fechafin" type="date">
+            <column name="fechafin" length="13" not-null="true" />
+        </property>
+        <property name="fecharegistro" type="date">
+            <column name="fecharegistro" length="13" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="detalleordenproduccions" inverse="true">
+            <key>
+                <column name="idordenproduccion" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Detalleordenproduccion" />
+        </set>
+        <set name="asignacions" inverse="true">
+            <key>
+                <column name="idordenproduccion" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Asignacion" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Vistaxrol" table="vistaxrol" schema="public">
+        <composite-id name="id" class="modelos.VistaxrolId">
+            <key-property name="idvista" type="int">
+                <column name="idvista" />
+            </key-property>
+            <key-property name="idrol" type="int">
+                <column name="idrol" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="vista" class="modelos.Vista" update="false" insert="false" fetch="select">
+            <column name="idvista" not-null="true">
+                <comment>Es la vista relacionada a un rol.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="rol" class="modelos.Rol" update="false" insert="false" fetch="select">
+            <column name="idrol" not-null="true">
+                <comment>Rol relacionado a una vista.</comment>
+            </column>
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

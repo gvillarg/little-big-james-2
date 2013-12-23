@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-nov-2013 13:30:36 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="modelos.Requerimientocompraxproducto" table="requerimientocompraxproducto" schema="public">
+        <composite-id name="id" class="modelos.RequerimientocompraxproductoId">
+            <key-property name="idreqerimientocompra" type="int">
+                <column name="idreqerimientocompra" />
+            </key-property>
+            <key-property name="idproducto" type="int">
+                <column name="idproducto" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="requirimientocompra" class="modelos.Requirimientocompra" update="false" insert="false" fetch="select">
+            <column name="idreqerimientocompra" not-null="true">
+                <comment>Es el requermiento de compra asociado a un producto.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="producto" class="modelos.Producto" update="false" insert="false" fetch="select">
+            <column name="idproducto" not-null="true">
+                <comment>Es el producto relacionado a un requerimiento de compra.</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidad" type="float">
+            <column name="cantidad" precision="8" scale="8" not-null="true">
+                <comment>Es la cantidad de un producto en un requerimiento de compra.</comment>
+            </column>
+        </property>
+        <set name="detallecompras" inverse="true">
+            <key>
+                <column name="idreqerimientocompra" not-null="true">
+                    <comment>Es el requerimiento de compra asociado al detalle de compra.</comment>
+                </column>
+                <column name="idproducto" not-null="true">
+                    <comment>Es el producto asociado a un detalle de compra.</comment>
+                </column>
+            </key>
+            <one-to-many class="modelos.Detallecompra" />
+        </set>
+    </class>
+</hibernate-mapping>
